@@ -19,8 +19,8 @@ Check out the live website here:
 ## Screenshots
 
 ### Homepage  
-![Homepage](![image](https://github.com/user-attachments/assets/6824feea-32ce-4045-82a4-8721a2589c71)
-)
+![image](https://github.com/user-attachments/assets/65d6d78b-d0f5-487b-bd5e-ca39b549d15c)
+
 
 ### Tic Tac Toe  
 ![Tic Tac Toe](./screenshots/tic-tac-toe.png)
