@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+        <title>Tic Tac Toe</title>
+        <link rel="stylesheet" href="../../style.css">
+        <style>
+           /* simple internal style just for this game */
+           .board {
+                display: grid;
+                grid-template-columns: repeat(3, 100px);
+                grid-template-rows: repeat(3, 100px);
+                margin: 20px auto;
+                gap: 5px;
+                width: max-content;
+            }
+            .cell {
+                background-color: #f2f2f2;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 2rem;
+                border: 2px solid #ccc;
+                cursor: pointer;
+            }
+            #message {
+                text-align: center;
+                margin-top: 10px;
+                font-size: 1.2rem;
+            }
+            .back {
+                display: block;
+                text-align: center;
+                margin-top: 15px;
+                color: #007bff;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="text-align: center;">Tic Tac Toe</h1>
+        <!-- game board container-->
+        <div class="board">
+            <!-- 9 clickable cells for the game-->
+            <div class="cell" id="cell-0"></div>
+            <div class="cell" id="cell-1"></div>
+            <div class="cell" id="cell-2"></div>
+            <div class="cell" id="cell-3"></div>
+            <div class="cell" id="cell-4"></div>
+            <div class="cell" id="cell-5"></div>
+            <div class="cell" id="cell-6"></div>
+            <div class="cell" id="cell-7"></div>
+            <div class="cell" id="cell-8"></div>
+            <div class="cell" id="cell-9"></div>
+        </div>
+        <!-- message display -->
+        <p id="message"></p>
+        
+        <!-- reset button to restart the game -->
+        <button id="resetBtn" style="display: block; margin: 10px auto;">Reset Game</button>
+
+        <!-- back link to return to the games list -->
+        <a href="../../index.html" class="back">Back to Games List</a>
+
+        <!-- load game logic-->
+        <script src="game.js"></script>
+    </body>
+    
+</html>

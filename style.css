@@ -1,0 +1,36 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 2rem;
+}
+
+/* Title Styling */
+h1 {
+    margin-bottom: 2rem;
+}
+
+/* Game Menu */
+.game-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* game buttons */
+.game-menu a {
+    text-decoration: none;
+    padding: 1rem;
+    font-size: 1.5rem;
+    background: #008cff;
+    color: white;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+/* hover effect */
+.game-menu a:hover {
+    background: #005fbb;
+}
