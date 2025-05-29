@@ -23,10 +23,12 @@ Check out the live website here:
 
 
 ### Tic Tac Toe  
-![Tic Tac Toe](./screenshots/tic-tac-toe.png)
+![image](https://github.com/user-attachments/assets/8c690efe-7b9f-47e3-a9fb-2100ab2fd2f8)
+
 
 ### Connect 4  
-![Connect 4](./screenshots/connect-4.png)
+![image](https://github.com/user-attachments/assets/1d401b08-5906-4dac-9272-f7ddc35c55ed)
+
 
 
 ---
