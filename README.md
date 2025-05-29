@@ -12,7 +12,7 @@ This project is a full frontend implementation, easy to play on any modern brows
 ## Live Demo
 
 Check out the live website here:  
-[https://your-username.github.io/mini-games/](https://your-username.github.io/mini-games/)
+[https://angelonol.github.io/mini-games]
 
 ---
 
