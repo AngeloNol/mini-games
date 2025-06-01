@@ -125,7 +125,7 @@ function resetGame() {
 }
 
 // Manual reset
-resetBtn.addEventListener("click", resetGame);
+//resetBtn.addEventListener("click", resetGame);
 
 // Start game
 createBoard();
