@@ -46,7 +46,7 @@ function handleCellClick(col) {
       if (checkWin(row, col)) {
         message.textContent = `${currentPlayer.toUpperCase()} wins!`;
         disableBoard();
-        setTimeout(resetGame, 3000); // auto-reset after win
+        setTimeout(resetGame, 5000); // auto-reset after win
         return;
       } else if (isDraw()) {
         message.textContent = "It's a draw!";
