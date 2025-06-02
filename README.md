@@ -5,6 +5,7 @@ Includes:
 
 - Tic Tac Toe
 - Connect 4
+- Hangman
 
 This project is a full frontend implementation, easy to play on any modern browser, and hosted for free using [GitHub Pages](https://pages.github.com/).
 
@@ -29,7 +30,7 @@ Check out the live website here:
 ### Connect 4  
 ![image](https://github.com/user-attachments/assets/1d401b08-5906-4dac-9272-f7ddc35c55ed)
 
-
+### Hangman
 
 ---
 
