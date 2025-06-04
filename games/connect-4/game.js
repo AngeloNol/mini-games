@@ -1,15 +1,23 @@
+// DOM Elements
 const boardElement = document.getElementById("board");
 const message = document.getElementById("message");
 const resetButton = document.getElementById("reset-button");
 
-let board = Array(6).fill(null).map(() => Array(7).fill(null));
+// Game Constants
+const ROWS = 6;
+const COLS = 7;
+
+// Game State
+let board = Array.from({ length: ROWS }, () => Array(COLS).fill(null));
 let currentPlayer = "Red";
 let gameOver = false;
 
+// Create and render the board cells
 function createBoard() {
   boardElement.innerHTML = "";
-  for (let row = 0; row < 6; row++) {
-    for (let col = 0; col < 7; col++) {
+
+  for (let row = 0; row < ROWS; row++) {
+    for (let col = 0; col < COLS; col++) {
       const cell = document.createElement("div");
       cell.classList.add("cell");
       cell.dataset.row = row;
@@ -19,93 +27,111 @@ function createBoard() {
   }
 }
 
-function drawBoard() {
-  const cells = document.querySelectorAll(".cell");
-  cells.forEach(cell => {
-    const row = parseInt(cell.dataset.row);
-    const col = parseInt(cell.dataset.col);
-    cell.innerHTML = "";
-    if (board[row][col]) {
-      const disc = document.createElement("div");
-      disc.classList.add("disc", board[row][col]);
-      disc.style.transform = "translateY(-300px)";
-      requestAnimationFrame(() => {
-        disc.style.transform = "translateY(0)";
-      });
-      cell.appendChild(disc);
-    }
-  });
-}
-
+// Get the first available row in the selected column
 function getAvailableRow(col) {
-  for (let row = 5; row >= 0; row--) {
-    if (board[row][col] === null) {
+  for (let row = ROWS - 1; row >= 0; row--) {
+    if (!board[row][col]) {
       return row;
     }
   }
-  return -1;
+  return null;
 }
 
+// Drop a disc with falling animation
+function dropDisc(row, col, color) {
+  const cell = document.querySelector(
+    `.cell[data-row="${row}"][data-col="${col}"]`
+  );
+  const disc = document.createElement("div");
+  disc.classList.add("disc", color);
+  cell.appendChild(disc);
+}
+
+// Check for a win starting from a given cell
+function checkWin(row, col) {
+  const directions = [
+    [0, 1],  // Horizontal
+    [1, 0],  // Vertical
+    [1, 1],  // Diagonal \
+    [1, -1], // Diagonal /
+  ];
+
+  for (let [dx, dy] of directions) {
+    let count = 1;
+
+    count += countDirection(row, col, dx, dy);
+    count += countDirection(row, col, -dx, -dy);
+
+    if (count >= 4) return true;
+  }
+
+  return false;
+}
+
+// Count discs in a direction
+function countDirection(row, col, dx, dy) {
+  let r = row + dx;
+  let c = col + dy;
+  let count = 0;
+
+  while (
+    r >= 0 &&
+    r < ROWS &&
+    c >= 0 &&
+    c < COLS &&
+    board[r][c] === currentPlayer
+  ) {
+    count++;
+    r += dx;
+    c += dy;
+  }
+
+  return count;
+}
+
+// Handle a player's move
 function handleClick(e) {
-  if (gameOver) return;
+  if (gameOver || !e.target.classList.contains("cell")) return;
+
   const col = parseInt(e.target.dataset.col);
-  if (isNaN(col)) return;
-
   const row = getAvailableRow(col);
-  if (row === -1) return;
 
+  if (row === null) return;
+
+  // Update game state
   board[row][col] = currentPlayer;
-  drawBoard();
-  checkGameEnd(row, col);
-}
+  dropDisc(row, col, currentPlayer);
 
-function checkGameEnd(row, col) {
+  // Check for win
   if (checkWin(row, col)) {
     message.textContent = `${currentPlayer} wins!`;
     gameOver = true;
-    setTimeout(resetGame, 5000); // 5-second delay on win
-  } else if (board.flat().every(cell => cell !== null)) {
+    setTimeout(resetGame, 5000); // Delay reset after win
+    return;
+  }
+
+  // Check for draw
+  if (board.flat().every(cell => cell !== null)) {
     message.textContent = "It's a draw!";
     gameOver = true;
-    resetGame(); // Immediate reset on draw
-  } else {
-    currentPlayer = currentPlayer === "Red" ? "Yellow" : "Red";
+    resetGame(); // Reset immediately on draw
+    return;
   }
+
+  // Switch player
+  currentPlayer = currentPlayer === "Red" ? "Yellow" : "Red";
 }
 
-function checkWin(row, col) {
-  const directions = [
-    [[0, 1], [0, -1]],  // Horizontal
-    [[1, 0], [-1, 0]],  // Vertical
-    [[1, 1], [-1, -1]], // Diagonal \
-    [[1, -1], [-1, 1]]  // Diagonal /
-  ];
-
-  return directions.some(direction => {
-    let count = 1;
-    direction.forEach(([dx, dy]) => {
-      let r = row + dx;
-      let c = col + dy;
-      while (r >= 0 && r < 6 && c >= 0 && c < 7 && board[r][c] === currentPlayer) {
-        count++;
-        r += dx;
-        c += dy;
-      }
-    });
-    return count >= 4;
-  });
-}
-
+// Reset the board state and UI
 function resetGame() {
-  board = Array(6).fill(null).map(() => Array(7).fill(null));
+  board = Array.from({ length: ROWS }, () => Array(COLS).fill(null));
   currentPlayer = "Red";
   gameOver = false;
   message.textContent = "";
-  drawBoard();
+  createBoard();
 }
 
+// Initialize the game
+createBoard();
 boardElement.addEventListener("click", handleClick);
 resetButton.addEventListener("click", resetGame);
-
-createBoard();
-drawBoard();

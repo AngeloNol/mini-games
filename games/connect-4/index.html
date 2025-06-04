@@ -3,32 +3,101 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hangman Game</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Connect 4</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    /* Connect 4 board container */
+    #board {
+      display: grid;
+      grid-template-columns: repeat(7, 80px);
+      grid-template-rows: repeat(6, 80px);
+      gap: 5px;
+      background-color: #0074D9;
+      padding: 10px;
+      border-radius: 15px;
+      width: fit-content;
+      margin: 0 auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    /* Each cell simulates a circular hole */
+    .cell {
+      width: 80px;
+      height: 80px;
+      background-color: #f2f2f2;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Falling disc animation */
+    .disc {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      position: absolute;
+      top: -300px;
+      animation: fall 0.4s ease-out forwards;
+    }
+
+    .Red {
+      background-color: red;
+    }
+
+    .Yellow {
+      background-color: yellow;
+    }
+
+    @keyframes fall {
+      to {
+        top: 5px;
+      }
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #reset-button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Hangman Game</h1>
+  <h1>Connect 4</h1>
 
-  <label for="topic-select">Choose a topic:</label>
-  <select id="topic-select">
-    <option value="">-- Select a topic --</option>
-    <option value="animals">Animals</option>
-    <option value="fruits">Fruits</option>
-  </select>
+  <!-- Game board grid -->
+  <div id="board"></div>
 
-  <div id="custom-word-container">
-    <label for="custom-word">Or enter your own word/sentence:</label>
-    <input type="text" id="custom-word" />
-    <button id="start-custom">Start Game</button>
-  </div>
-
-  <p id="word">_ _ _ _</p>
-  <div id="letters"></div>
-  <canvas id="hangman" width="200" height="250"></canvas>
-
+  <!-- Win/Draw message -->
   <p id="message"></p>
-  <button id="reset">Reset</button>
 
+  <!-- Reset game button -->
+  <button id="reset-button">Reset</button>
+
+  <!-- back link to return to the games list -->
+  <a href="../../index.html" class="back">Back to Games List</a>
+
+
+  <!-- Game logic -->
   <script src="game.js"></script>
 </body>
 </html>
